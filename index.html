@@ -8,6 +8,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
             --bg-color: #0b090a;
@@ -46,13 +48,13 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image:
-                radial-gradient(circle at top left, rgba(229, 56, 59, 0.1), transparent 50%),
-                radial-gradient(circle at bottom right, rgba(252, 163, 17, 0.05), transparent 50%);
+                radial-gradient(circle at top left, rgba(229, 56, 59, 0.08), transparent 40%),
+                radial-gradient(circle at bottom right, rgba(252, 163, 17, 0.05), transparent 40%);
             background-attachment: fixed;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
@@ -82,7 +84,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             animation: fadeInDown 1s ease;
         }
 
@@ -114,7 +116,7 @@
             font-size: 1.2rem;
             color: var(--text-muted);
             font-weight: 400;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -149,7 +151,7 @@
 
         .hitlist-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr;
             gap: 2rem;
         }
 
@@ -157,15 +159,16 @@
             background: var(--card-bg);
             border: 1px solid var(--border-light);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 2.5rem;
             position: relative;
             transition: all 0.3s ease;
-            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .chapter-card:hover {
-            transform: translateY(-5px);
             border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
@@ -178,68 +181,91 @@
             width: 100%;
             height: 5px;
             background: var(--accent);
+            border-radius: 16px 16px 0 0;
         }
 
-        .chap-number {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 6rem;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.03);
-            font-family: 'Outfit', sans-serif;
-            z-index: 0;
-            user-select: none;
-        }
-
-        .card-content {
-            position: relative;
-            z-index: 1;
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
         }
 
         .chapter-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
             color: #fff;
-            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
+        }
+
+        .chap-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--accent);
+            color: #000;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
         }
 
         .weightage {
-            font-size: 0.8rem;
+            font-size: 1rem;
+            font-weight: 600;
             background: rgba(255, 255, 255, 0.1);
-            padding: 0.2rem 0.6rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             color: var(--accent);
             border: 1px solid var(--accent);
         }
 
-        .hit-list {
+        .pyq-list {
             list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .hit-list li {
-            margin-bottom: 1rem;
-            padding-left: 28px;
+        .pyq-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
             position: relative;
-            color: #ced4da;
-            font-size: 0.95rem;
         }
 
-        .hit-list li::before {
-            content: '📌';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 1.1rem;
+        .pyq-year {
+            font-size: 0.8rem;
+            font-weight: 800;
+            background: var(--accent);
+            color: #000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
         }
 
-        .hit-list li span {
-            font-weight: bold;
-            color: #fff;
+        .pyq-type {
+            font-size: 0.85rem;
+            color: #adb5bd;
+            margin-left: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pyq-q {
+            color: #f8f9fa;
+            font-size: 1.05rem;
+        }
+
+        .highlight {
+            color: #ffd166;
+            font-weight: 600;
+        }
+
+        .mjx-chtml {
+            color: white !important;
         }
 
         /* Assigning colors cyclically through CSS variables */
@@ -274,6 +300,18 @@
             border-top: 1px solid var(--border-light);
             color: var(--text-muted);
         }
+
+        @media (max-width: 768px) {
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .chapter-title {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -284,229 +322,340 @@
 
         <header>
             <h1>CBSE 10-Year PYQ Hitlist 🎯</h1>
-            <p class="subtitle">CBSE Class 12th Math ke woh strictly selected topics jo har saal board paper mein aate
-                hi hain! Prepare these to guarantee 80/80 marks.</p>
+            <p class="subtitle">Complete chapter-wise breakdown of exact questions & patterns repeated in CBSE Board
+                Exams (2015-2024). Target: 80/80.</p>
         </header>
 
         <div class="info-alert">
             <div class="icon">⚠️</div>
             <div>
-                <h3>Pratik's Target Rule for Ishu:</h3>
-                <p>Sirf book padhne se topper nahi bante! In topics se <b>Har Chapter ke atleast 5 previous year
-                        questions (2014-2023)</b> paper pe solve karke practice karna zaruri hai. CBSE apna pattern inhi
-                    topics ke ird-gird set karta hai!</p>
+                <h3>Pratik's Advice for Ishu:</h3>
+                <p>Ishu, board ka paper idhar se hi ban kar aayega! Har chapter ke neeche maine <b>exact board questions
+                        aur repeated patterns</b> likh diye hain. In questions ko haath se solve karna mandatory hai!
+                </p>
             </div>
         </div>
 
-        <!-- The 13 Chapters Grid -->
+        <!-- The 13 Chapters List -->
         <div class="hitlist-grid">
 
-            <!-- 1 -->
+            <!-- Chapter 1 -->
             <div class="chapter-card">
-                <div class="chap-number">01</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Relations & Functions <span class="weightage">~ 4 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Equivalence Relation Proof:</span> Questions showing relation R is reflexive,
-                            symmetric & transitive (usually set of integers / modulus relations).</li>
-                        <li><span>Bijective Proofs:</span> Prove function f(x) is One-One and Onto.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">01</span> Relations & Functions</div>
+                    <div class="weightage">~ 4 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023, 2019</span> <span class="pyq-type">3 Marker (Prove
+                            Equivalence)</span>
+                        <div class="pyq-q">Let $A = \{x \in \mathbb{Z} : 0 \le x \le 12\}$. Show that the relation $R$
+                            in $A$ given by $R = \{(a, b) : |a - b| \text{ is a multiple of } 4\}$ is an equivalence
+                            relation. Find the set of all elements related to 1.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2020, 2018</span> <span class="pyq-type">3 Marker (Bijective
+                            Function)</span>
+                        <div class="pyq-q">Show that the function $f: \mathbb{R} \to \{x \in \mathbb{R} : -1 < x < 1\}$
+                                defined by $f(x)=\frac{x}{1+|x|}, x \in \mathbb{R}$ is one-one and onto function.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 2 -->
+            <!-- Chapter 2 -->
             <div class="chapter-card">
-                <div class="chap-number">02</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Inverse Trigo <span class="weightage">~ 4 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Principal Values:</span> Finding values of sin⁻¹(sin(2π/3)) or tan⁻¹(-√3) keeping
-                            domains in mind.</li>
-                        <li><span>Simplest Form:</span> Substituting x=tanθ / sinθ to simplify complex ITFs.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">02</span> Inverse Trigonometric Functions</div>
+                    <div class="weightage">~ 4 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023, 2022</span> <span class="pyq-type">1/2 Marker (Principal
+                            Value)</span>
+                        <div class="pyq-q">Find the principal value of $\cos^{-1}\left(\cos \frac{7\pi}{6}\right)$ and
+                            $\tan^{-1}\left(\tan \frac{3\pi}{4}\right)$.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2019, 2017</span> <span class="pyq-type">3 Marker
+                            (Simplification)</span>
+                        <div class="pyq-q">Write in the simplest form: $\tan^{-1}\left( \frac{\sqrt{1+x^2} - 1}{x}
+                            \right), x \neq 0$. <br><br><i>Hint: Put $x = \tan\theta$.</i></div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 3 -->
+            <!-- Chapter 3 -->
             <div class="chapter-card">
-                <div class="chap-number">03</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Matrices <span class="weightage">~ 5 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Symmetric & Skew:</span> Express matrix as a sum of symmetric & skew-symmetric
-                            matrices.</li>
-                        <li><span>Multiplication properties:</span> Prove A² - 5A + 7I = 0 type equality equations.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">03</span> Matrices</div>
+                    <div class="weightage">~ 5 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2024, 2020</span> <span class="pyq-type">3 Marker (Polynomial Matrix
+                            Eq)</span>
+                        <div class="pyq-q">If $A = \begin{pmatrix} 3 & 1 \\ -1 & 2 \end{pmatrix}$, show that $A^2 - 5A +
+                            7I = 0$. Hence find $A^{-1}$.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2018</span> <span class="pyq-type">3 Marker (Symmetric &
+                            Skew)</span>
+                        <div class="pyq-q">Express the matrix $A = \begin{pmatrix} 2 & -2 & -4 \\ -1 & 3 & 4 \\ 1 & -2 &
+                            -3 \end{pmatrix}$ as the sum of a symmetric and a skew-symmetric matrix.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 4 -->
+            <!-- Chapter 4 -->
             <div class="chapter-card">
-                <div class="chap-number">04</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Determinants <span class="weightage">~ 5 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Matrix Method (Long Q):</span> Solving system of 3 linear equations using X = A⁻¹B.
-                            (Guaranteed 5-Marker).</li>
-                        <li><span>Adjoint properties:</span> 1-mark MCQs on |adj A| = |A|ⁿ⁻¹.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">04</span> Determinants</div>
+                    <div class="weightage">~ 5 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">EVERY YEAR (2015-2024)</span> <span class="pyq-type">GUARANTEED 5 Marker
+                            (Matrix Method)</span>
+                        <div class="pyq-q">Solve the system of linear equations using matrix method:<br>
+                            $2x + 3y + 3z = 5$ <br>
+                            $x - 2y + z = -4$ <br>
+                            $3x - y - 2z = 3$</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023 MCQ</span> <span class="pyq-type">1 Marker (Adjoint
+                            Property)</span>
+                        <div class="pyq-q">If A is a square matrix of order 3 such that $|A| = -4$, then find the value
+                            of $|\text{adj A}|$. (Ans: $(-4)^{3-1} = 16$).</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 5 -->
+            <!-- Chapter 5 -->
             <div class="chapter-card">
-                <div class="chap-number">05</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Continuity & Diff. <span class="weightage">~ 8 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Find value of k:</span> If function is continuous at x=a, find unknown 'k' or 'a,b'.
-                        </li>
-                        <li><span>Logarithmic Diff:</span> Derivative of (sinx)ˣ + x^(sinx) using log.</li>
-                        <li><span>Double Derivative:</span> Prove that d²y/dx² - y = 0 type questions.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">05</span> Continuity & Differentiability</div>
+                    <div class="weightage">~ 8 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2022, 2019</span> <span class="pyq-type">3 Marker (Find unknown
+                            constants)</span>
+                        <div class="pyq-q">Find the values of $a$ and $b$ such that the function defined by:<br>
+                            $f(x) = \begin{cases} 5, & x \le 2 \\ ax + b, & 2 < x < 10 \\ 21, & x \ge 10
+                                \end{cases}$<br>
+                                is a continuous function.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2020, 2017</span> <span class="pyq-type">3 Marker (Logarithmic
+                            Diff)</span>
+                        <div class="pyq-q">Differentiate w.r.t $x$: $y = (\sin x)^x + x^{\sin x}$.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2024, 2018</span> <span class="pyq-type">4 Marker (Double
+                            Derivative)</span>
+                        <div class="pyq-q">If $y = ae^{mx} + be^{nx}$, show that $\frac{d^2y}{dx^2} - (m+n)\frac{dy}{dx}
+                            + mny = 0$.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 6 -->
+            <!-- Chapter 6 -->
             <div class="chapter-card">
-                <div class="chap-number">06</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Application of Derivatives <span class="weightage">~ 9 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Maxima/Minima Word Problems:</span> Maximize volume of cylinder in cone/sphere or
-                            maximize area of printing page. (Very Important Case Study / Long Question).</li>
-                        <li><span>Increasing/Decreasing:</span> Find intervals where function is strictly increasing.
-                        </li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">06</span> Application of Derivatives</div>
+                    <div class="weightage">~ 9 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023, 2019, 2016</span> <span class="pyq-type">GUARANTEED 5 Marker
+                            (Word Prob)</span>
+                        <div class="pyq-q">Show that the right circular cylinder of given surface and maximum volume is
+                            such that its height is equal to the diameter of the base.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2024 Case Study</span> <span class="pyq-type">4 Marker
+                            (Increasing/Decreasing)</span>
+                        <div class="pyq-q">Find the intervals in which the function $f(x) = 2x^3 - 3x^2 - 36x + 7$ is
+                            (a) strictly increasing, (b) strictly decreasing.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 7 -->
+            <!-- Chapter 7 -->
             <div class="chapter-card">
-                <div class="chap-number">07</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Integrals <span class="weightage">~ 9 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>King's Property:</span> Definite integrals using ∫f(x) = ∫f(a-x) property, specially
-                            evaluating ∫(√x)/(√x + √(a-x)) or Modulus function integrals.</li>
-                        <li><span>Partial Fractions:</span> Integrals type 1/((x+1)(x+2)).</li>
-                        <li><span>By Parts:</span> Special rule integral of eˣ[f(x) + f'(x)].</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">07</span> Integrals</div>
+                    <div class="weightage">~ 9 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">EVERY YEAR (King's Rule)</span> <span class="pyq-type">3/4 Marker
+                            (Definite Integral)</span>
+                        <div class="pyq-q">Evaluate: $\int_{0}^{\pi/2} \frac{\sqrt{\sin x}}{\sqrt{\sin x} + \sqrt{\cos
+                            x}} \, dx$. <br><i>(Standard Answer is always $\frac{\pi}{4}$)</i></div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2022, 2018</span> <span class="pyq-type">3 Marker (Modulus
+                            Integral)</span>
+                        <div class="pyq-q">Evaluate: $\int_{-1}^{2} |x^3 - x| \, dx$. <br><i>Hint: Find roots (0, 1, -1)
+                                and break limits.</i></div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2020</span> <span class="pyq-type">3 Marker (By Parts - Special
+                            Form)</span>
+                        <div class="pyq-q">Integrate: $\int e^x \left(\frac{1-x}{1+x^2}\right)^2 \, dx$ type questions
+                            reducible to $e^x[f(x)+f'(x)]$.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 8 -->
+            <!-- Chapter 8 -->
             <div class="chapter-card">
-                <div class="chap-number">08</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Application of Integrals <span class="weightage">~ 6 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Area of Bounded Region:</span> Area between parabola and line (y=x², y=x) or circle
-                            and line.</li>
-                        <li><span>Sketching curves:</span> Accurately drawing standard curves and finding enclosed area.
-                        </li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">08</span> Application of Integrals</div>
+                    <div class="weightage">~ 6 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023, 2019</span> <span class="pyq-type">4 Marker (Area
+                            Bounded)</span>
+                        <div class="pyq-q">Find the area of the region bounded by the parabola $y^2 = 4ax$ and its latus
+                            rectum.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2020, 2017</span> <span class="pyq-type">4 Marker (Area between 2
+                            curves)</span>
+                        <div class="pyq-q">Find the area of the region $\{(x, y) : x^2 \le y \le |x|\}$.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 9 -->
+            <!-- Chapter 9 -->
             <div class="chapter-card">
-                <div class="chap-number">09</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Differential Equations <span class="weightage">~ 7 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Linear DE (LDE):</span> Form dy/dx + Py = Q, finding Integrating Factor (I.F) and
-                            solving.</li>
-                        <li><span>Homogeneous DE:</span> Substituting y=vx and solving for variables separable.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">09</span> Differential Equations</div>
+                    <div class="weightage">~ 7 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2024, 2021</span> <span class="pyq-type">4 Marker (Linear
+                            Differential Eq)</span>
+                        <div class="pyq-q">Find the general solution of the differential equation: $\frac{dy}{dx} + y
+                            \cot x = 2x + x^2 \cot x, \quad (x \neq 0)$.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2019, 2018</span> <span class="pyq-type">4 Marker (Homogeneous
+                            DE)</span>
+                        <div class="pyq-q">Solve the differential equation: $x \frac{dy}{dx} = y - x
+                            \tan\left(\frac{y}{x}\right)$.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 10 -->
+            <!-- Chapter 10 -->
             <div class="chapter-card">
-                <div class="chap-number">10</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Vector Algebra <span class="weightage">~ 7 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Dot/Cross Product:</span> Finding area of triangle/parallelogram or projecting vector
-                            A on B.</li>
-                        <li><span>Perpendicular Vectors:</span> Use condition A.B = 0 to find unknown scalars.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">10</span> Vector Algebra</div>
+                    <div class="weightage">~ 7 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2022, 2020</span> <span class="pyq-type">2/3 Marker (Dot
+                            Product)</span>
+                        <div class="pyq-q">If $\vec{a}, \vec{b}, \vec{c}$ are three mutually perpendicular vectors of
+                            equal magnitude, prove that $\vec{a} + \vec{b} + \vec{c}$ is equally inclined to $\vec{a},
+                            \vec{b}$ and $\vec{c}$.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023 MCQ</span> <span class="pyq-type">1 Marker (Cross
+                            Product)</span>
+                        <div class="pyq-q">Find the area of a parallelogram whose adjacent sides are determined by the
+                            vectors $\vec{a} = \hat{i} - \hat{j} + 3\hat{k}$ and $\vec{b} = 2\hat{i} - 7\hat{j} +
+                            \hat{k}$.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 11 -->
+            <!-- Chapter 11 -->
             <div class="chapter-card">
-                <div class="chap-number">11</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        3D Geometry <span class="weightage">~ 7 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Shortest Distance:</span> Finding shortest distance between two skew lines. (Another
-                            100% predictable Question).</li>
-                        <li><span>Image of Point:</span> Finding foot of perpendicular and image of a point in a line.
-                        </li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">11</span> Three Dimensional Geometry</div>
+                    <div class="weightage">~ 7 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">EVERY YEAR (2015-2024)</span> <span class="pyq-type">GUARANTEED 4 Marker
+                            (Shortest Dist)</span>
+                        <div class="pyq-q">Find the shortest distance between the lines:<br>
+                            $\vec{r} = (\hat{i} + 2\hat{j} + \hat{k}) + \lambda(\hat{i} - \hat{j} + \hat{k})$<br>
+                            $\vec{r} = (2\hat{i} - \hat{j} - \hat{k}) + \mu(2\hat{i} + \hat{j} + 2\hat{k})$</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2019, 2016</span> <span class="pyq-type">4 Marker (Foot of
+                            Perpendicular)</span>
+                        <div class="pyq-q">Find the coordinates of the foot of perpendicular drawn from the point
+                            $P(0,2,3)$ to the line $\frac{x+3}{5} = \frac{y-1}{2} = \frac{z+4}{3}$. Also find the length
+                            of perpendicular.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 12 -->
+            <!-- Chapter 12 -->
             <div class="chapter-card">
-                <div class="chap-number">12</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Linear Programming <span class="weightage">~ 5 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Corner Point Graphical Method:</span> Maximize or Minimize Z=ax+by subject to 3-4
-                            constraints. Identifying feasible region properly.</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">12</span> Linear Programming</div>
+                    <div class="weightage">~ 5 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2023, 2021, 2018</span> <span class="pyq-type">5 Marker (Graphical
+                            LPP)</span>
+                        <div class="pyq-q">Solve the following LPP graphically: <br>
+                            Minimize $Z = 3x + 5y$ <br>
+                            Subject to constraints: <br>
+                            $x + 3y \ge 3$ <br>
+                            $x + y \ge 2$ <br>
+                            $x, y \ge 0$.</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 13 -->
+            <!-- Chapter 13 -->
             <div class="chapter-card">
-                <div class="chap-number">13</div>
-                <div class="card-content">
-                    <div class="chapter-title">
-                        Probability <span class="weightage">~ 8 Marks</span>
-                    </div>
-                    <ul class="hit-list">
-                        <li><span>Bayes' Theorem:</span> The ultimate question asked every year (e.g., probability of
-                            choosing a specific bag, disease testing).</li>
-                        <li><span>Probability Distribution:</span> Finding Mean/Expected value E(X) from random
-                            experiment chart.</li>
-                        <li><span>Conditional Prob:</span> Direct formula based questions P(A|B).</li>
-                    </ul>
+                <div class="card-header">
+                    <div class="chapter-title"><span class="chap-number">13</span> Probability</div>
+                    <div class="weightage">~ 8 Marks Volume</div>
                 </div>
+                <ul class="pyq-list">
+                    <li class="pyq-item">
+                        <span class="pyq-year">ALMOST EVERY YEAR</span> <span class="pyq-type">5 Marker / Case Study
+                            (Bayes' Theorem)</span>
+                        <div class="pyq-q">An insurance company insured 2000 scooter drivers, 4000 car drivers and 6000
+                            truck drivers. The probability of an accident is 0.01, 0.03 and 0.15 respectively. One of
+                            the insured persons meets with an accident. What is the probability that he is a scooter
+                            driver?</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2020, 2016</span> <span class="pyq-type">3 Marker (Probability
+                            Distribution)</span>
+                        <div class="pyq-q">Two cards are drawn simultaneously (without replacement) from a well-shuffled
+                            pack of 52 cards. Find the mean and variance of the number of red cards.</div>
+                    </li>
+                    <li class="pyq-item">
+                        <span class="pyq-year">CBSE 2022</span> <span class="pyq-type">2 Marker (Independent
+                            Events)</span>
+                        <div class="pyq-q">If A and B are two independent events such that $P(A) = 0.3$ and $P(A \cup B)
+                            = 0.5$, then find $P(B)$.</div>
+                    </li>
+                </ul>
             </div>
 
         </div>
 
         <div class="footer">
-            <p><strong>Hitlist Compiled for Board Exams 2026</strong> - For Ishu 💕</p>
-            <p style="margin-top:0.5rem; font-size:1.1rem; color: #fca311;">Hit these topics, ace the paper! 🎯</p>
+            <p><strong>Perfect Hitlist Compiled for Board Exams 2026</strong> - For Ishu 💕</p>
+            <p style="margin-top:0.5rem; font-size:1.1rem; color: #fca311;">Ye questions raat lena! 80/80 ki guarantee!
+                🎯🚀</p>
         </div>
 
     </div>
