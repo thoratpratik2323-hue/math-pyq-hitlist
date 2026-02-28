@@ -4,24 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PYQ Hitlist | Ishu's Math Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    <title>Math PYQ Hitlist | 10 Year Previous Year Questions | CBSE Class 12</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #05080f;
-            --surface: rgba(255, 255, 255, 0.04);
-            --border: rgba(255, 255, 255, 0.08);
+            --bg-color: #0b090a;
+            --text-main: #f8f9fa;
+            --text-muted: #adb5bd;
+            --card-bg: #161a1d;
+            --border-light: rgba(255, 255, 255, 0.1);
 
-            --primary: {
-                    {
-                    COLOR
-                }
-            }
+            /* Subject Colors for Hitlist */
+            --hit-1: #e5383b;
+            /* Red */
+            --hit-2: #fca311;
+            /* Orange */
+            --hit-3: #ffd166;
+            /* Yellow */
+            --hit-4: #4cc9f0;
+            /* Cyan */
+            --hit-5: #b5179e;
+            /* Purple */
+            --hit-6: #1dd3b0;
+            /* Green */
 
-            ;
-            --text: #e2e8f0;
-            --muted: #64748b;
+            --glow: 0 0 25px rgba(229, 56, 59, 0.4);
         }
 
         * {
@@ -31,86 +40,477 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at top left, rgba(229, 56, 59, 0.1), transparent 50%),
+                radial-gradient(circle at bottom right, rgba(252, 163, 17, 0.05), transparent 50%);
+            background-attachment: fixed;
         }
 
         .container {
-            text-align: center;
-            background: var(--surface);
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
             position: relative;
-            overflow: hidden;
         }
 
-        .container::before {
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transform: translateX(-3px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #e5383b, #fca311, #ffd166);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 20px rgba(229, 56, 59, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .info-alert {
+            background: rgba(229, 56, 59, 0.1);
+            border: 1px solid rgba(229, 56, 59, 0.3);
+            border-left: 5px solid var(--hit-1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-alert .icon {
+            font-size: 2.5rem;
+        }
+
+        .info-alert h3 {
+            color: #fff;
+            margin-bottom: 0.3rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+        }
+
+        .info-alert p {
+            color: #ced4da;
+            font-size: 0.95rem;
+        }
+
+        .hitlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .chapter-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .chapter-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary);
+            width: 100%;
+            height: 5px;
+            background: var(--accent);
         }
 
-        .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+        .chap-number {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 6rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            font-family: 'Outfit', sans-serif;
+            z-index: 0;
+            user-select: none;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: #fff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
-        p {
-            color: var(--muted);
-            line-height: 1.6;
-            margin-bottom: 2rem;
+        .weightage {
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .hit-list {
+            list-style: none;
+        }
+
+        .hit-list li {
+            margin-bottom: 1rem;
+            padding-left: 28px;
+            position: relative;
+            color: #ced4da;
+            font-size: 0.95rem;
+        }
+
+        .hit-list li::before {
+            content: '📌';
+            position: absolute;
+            left: 0;
+            top: 2px;
             font-size: 1.1rem;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+        .hit-list li span {
+            font-weight: bold;
             color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
         }
 
-        .btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
-            transform: translateY(-2px);
+        /* Assigning colors cyclically through CSS variables */
+        .chapter-card:nth-child(6n+1) {
+            --accent: var(--hit-1);
+        }
+
+        .chapter-card:nth-child(6n+2) {
+            --accent: var(--hit-2);
+        }
+
+        .chapter-card:nth-child(6n+3) {
+            --accent: var(--hit-3);
+        }
+
+        .chapter-card:nth-child(6n+4) {
+            --accent: var(--hit-4);
+        }
+
+        .chapter-card:nth-child(6n+5) {
+            --accent: var(--hit-5);
+        }
+
+        .chapter-card:nth-child(6n+6) {
+            --accent: var(--hit-6);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 3rem 1rem;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
-        <div class="icon">🎯</div>
-        <h1>PYQ Hitlist</h1>
-        <p>Previous Year Questions from last 10 years.</p>
-        <a href="https://thoratpratik2323-hue.github.io/ishu-math-hub/" class="btn">â† Back to Math Hub</a>
+        <a href="https://thoratpratik2323-hue.github.io/ishu-math-hub/" class="btn-back">← Back to Math Hub</a>
+
+        <header>
+            <h1>CBSE 10-Year PYQ Hitlist 🎯</h1>
+            <p class="subtitle">CBSE Class 12th Math ke woh strictly selected topics jo har saal board paper mein aate
+                hi hain! Prepare these to guarantee 80/80 marks.</p>
+        </header>
+
+        <div class="info-alert">
+            <div class="icon">⚠️</div>
+            <div>
+                <h3>Pratik's Target Rule for Ishu:</h3>
+                <p>Sirf book padhne se topper nahi bante! In topics se <b>Har Chapter ke atleast 5 previous year
+                        questions (2014-2023)</b> paper pe solve karke practice karna zaruri hai. CBSE apna pattern inhi
+                    topics ke ird-gird set karta hai!</p>
+            </div>
+        </div>
+
+        <!-- The 13 Chapters Grid -->
+        <div class="hitlist-grid">
+
+            <!-- 1 -->
+            <div class="chapter-card">
+                <div class="chap-number">01</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Relations & Functions <span class="weightage">~ 4 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Equivalence Relation Proof:</span> Questions showing relation R is reflexive,
+                            symmetric & transitive (usually set of integers / modulus relations).</li>
+                        <li><span>Bijective Proofs:</span> Prove function f(x) is One-One and Onto.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="chapter-card">
+                <div class="chap-number">02</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Inverse Trigo <span class="weightage">~ 4 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Principal Values:</span> Finding values of sin⁻¹(sin(2π/3)) or tan⁻¹(-√3) keeping
+                            domains in mind.</li>
+                        <li><span>Simplest Form:</span> Substituting x=tanθ / sinθ to simplify complex ITFs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="chapter-card">
+                <div class="chap-number">03</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Matrices <span class="weightage">~ 5 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Symmetric & Skew:</span> Express matrix as a sum of symmetric & skew-symmetric
+                            matrices.</li>
+                        <li><span>Multiplication properties:</span> Prove A² - 5A + 7I = 0 type equality equations.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="chapter-card">
+                <div class="chap-number">04</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Determinants <span class="weightage">~ 5 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Matrix Method (Long Q):</span> Solving system of 3 linear equations using X = A⁻¹B.
+                            (Guaranteed 5-Marker).</li>
+                        <li><span>Adjoint properties:</span> 1-mark MCQs on |adj A| = |A|ⁿ⁻¹.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="chapter-card">
+                <div class="chap-number">05</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Continuity & Diff. <span class="weightage">~ 8 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Find value of k:</span> If function is continuous at x=a, find unknown 'k' or 'a,b'.
+                        </li>
+                        <li><span>Logarithmic Diff:</span> Derivative of (sinx)ˣ + x^(sinx) using log.</li>
+                        <li><span>Double Derivative:</span> Prove that d²y/dx² - y = 0 type questions.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="chapter-card">
+                <div class="chap-number">06</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Application of Derivatives <span class="weightage">~ 9 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Maxima/Minima Word Problems:</span> Maximize volume of cylinder in cone/sphere or
+                            maximize area of printing page. (Very Important Case Study / Long Question).</li>
+                        <li><span>Increasing/Decreasing:</span> Find intervals where function is strictly increasing.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="chapter-card">
+                <div class="chap-number">07</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Integrals <span class="weightage">~ 9 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>King's Property:</span> Definite integrals using ∫f(x) = ∫f(a-x) property, specially
+                            evaluating ∫(√x)/(√x + √(a-x)) or Modulus function integrals.</li>
+                        <li><span>Partial Fractions:</span> Integrals type 1/((x+1)(x+2)).</li>
+                        <li><span>By Parts:</span> Special rule integral of eˣ[f(x) + f'(x)].</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="chapter-card">
+                <div class="chap-number">08</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Application of Integrals <span class="weightage">~ 6 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Area of Bounded Region:</span> Area between parabola and line (y=x², y=x) or circle
+                            and line.</li>
+                        <li><span>Sketching curves:</span> Accurately drawing standard curves and finding enclosed area.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="chapter-card">
+                <div class="chap-number">09</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Differential Equations <span class="weightage">~ 7 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Linear DE (LDE):</span> Form dy/dx + Py = Q, finding Integrating Factor (I.F) and
+                            solving.</li>
+                        <li><span>Homogeneous DE:</span> Substituting y=vx and solving for variables separable.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 10 -->
+            <div class="chapter-card">
+                <div class="chap-number">10</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Vector Algebra <span class="weightage">~ 7 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Dot/Cross Product:</span> Finding area of triangle/parallelogram or projecting vector
+                            A on B.</li>
+                        <li><span>Perpendicular Vectors:</span> Use condition A.B = 0 to find unknown scalars.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 11 -->
+            <div class="chapter-card">
+                <div class="chap-number">11</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        3D Geometry <span class="weightage">~ 7 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Shortest Distance:</span> Finding shortest distance between two skew lines. (Another
+                            100% predictable Question).</li>
+                        <li><span>Image of Point:</span> Finding foot of perpendicular and image of a point in a line.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 12 -->
+            <div class="chapter-card">
+                <div class="chap-number">12</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Linear Programming <span class="weightage">~ 5 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Corner Point Graphical Method:</span> Maximize or Minimize Z=ax+by subject to 3-4
+                            constraints. Identifying feasible region properly.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 13 -->
+            <div class="chapter-card">
+                <div class="chap-number">13</div>
+                <div class="card-content">
+                    <div class="chapter-title">
+                        Probability <span class="weightage">~ 8 Marks</span>
+                    </div>
+                    <ul class="hit-list">
+                        <li><span>Bayes' Theorem:</span> The ultimate question asked every year (e.g., probability of
+                            choosing a specific bag, disease testing).</li>
+                        <li><span>Probability Distribution:</span> Finding Mean/Expected value E(X) from random
+                            experiment chart.</li>
+                        <li><span>Conditional Prob:</span> Direct formula based questions P(A|B).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p><strong>Hitlist Compiled for Board Exams 2026</strong> - For Ishu 💕</p>
+            <p style="margin-top:0.5rem; font-size:1.1rem; color: #fca311;">Hit these topics, ace the paper! 🎯</p>
+        </div>
+
     </div>
+
 </body>
 
 </html>
